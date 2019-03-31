@@ -1,0 +1,83 @@
+{
+    "variables": {
+      "vm_name": "windows10",
+      "cpu": "2",
+      "ram_size": "4096",
+      "disk_size": "41440",
+      "iso_url": "C:\\Users\\tyler\\Downloads\\17763.107.101029-1455.rs5_release_svc_refresh_CLIENTENTERPRISEEVAL_OEMRET_x64FRE_en-us.iso",
+      "iso_checksum_type": "sha256",
+      "iso_checksum": "0278FC4638741F4A1DC85C39ED7FA76BB15FD582165F6EF036E9A9FB2F029351", 
+      "username" : "Administrator",
+      "password" : "Administrator",
+      "output_directory": "C:\\Users\\tyler\\Documents\\Virtual Machines\\win10"
+    },
+    "builders": [
+    {
+      "vm_name":"{{user `vm_name`}}",
+      "type": "vmware-iso",
+      "boot_wait": "5s",
+      "disk_size": "{{user `disk_size`}}",
+      "floppy_files": [
+        "./windows/common/run-sysprep.cmd",
+        "./windows/common/run-sysprep.ps1",
+        "./windows/common/chocolatey_bootstrap.ps1",
+        "./windows/common/configure-winrm.ps1",
+        "./windows/windows-10-amd64/autounattend.xml",
+        "./windows/windows-10-amd64/sysprep-unattend.xml"
+      ],
+      "http_directory": "./windows/common/http/",
+      "guest_os_type": "windows9-64",
+      "headless": false,
+      "iso_url": "{{user `iso_url`}}",
+      "iso_checksum_type": "{{user `iso_checksum_type`}}",
+      "iso_checksum": "{{user `iso_checksum`}}",
+      "communicator":"winrm",
+      "winrm_username": "{{user `username`}}",
+      "winrm_password": "{{user `password`}}",
+      "winrm_timeout": "4h",
+      "shutdown_command": "a:\\run-sysprep.cmd",
+      "skip_compaction": false,
+      "vmx_data": {
+        "gui.fitguestusingnativedisplayresolution": "FALSE",
+        "memsize": "{{user `ram_size`}}",
+        "numvcpus": "{{user `cpu`}}",
+        "virtualHW.version": "16",
+        "scsi0.virtualDev": "lsisas1068",
+        "sound.autodetect": "TRUE",
+        "sound.fileName": "-1",
+        "sound.present": "TRUE",
+        "sound.startconnected": "TRUE",
+        "mks.enable3d": "TRUE",
+        "hypervisor.cpuid.v0": "FALSE",
+        "mce.enable": "TRUE",
+        "vhv.enable": "TRUE"
+      },
+      "output_directory": "{{ user `output_directory` }}"
+    }],
+    "provisioners": [
+      {
+        "type": "windows-restart",
+        "restart_timeout": "30m"
+      },
+      {
+        "type": "chef-solo",
+        "guest_os_type": "windows",
+        "skip_install": "true",
+        "cookbook_paths": ["cookbooks"],
+        "run_list": ["win10_wkstn"]
+      },
+      {
+        "type": "windows-restart",
+        "check_registry": "true",
+        "restart_timeout": "30m"
+      },
+      {
+      "type": "powershell",
+      "elevated_user": "{{user `username`}}",
+      "elevated_password": "{{user `password`}}",
+      "scripts": [
+        "./windows/common/cleanup.ps1",
+        "./windows/common/ConfigureRemotingForAnsible.ps1"
+      ]
+    }]
+}

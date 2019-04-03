@@ -7,6 +7,6 @@
 
 ## Impetus:
 
-If you do a lot of Packer builds you can quickly understand the need to build out for various platforms. Using a VMware Workstation based build, you can nest Hyper-V and VirtualBox inside a Windows 10 development environment. This allows you to test and build your Packer features for with most popular Packer builders locally.
+If you develop with Packer you understand the need to build for various platforms. Using this VMware Workstation build, you can nest Hyper-V and VirtualBox inside Windows 10. This allows you to test your Packer features for the most popular Packer builders locally.
 
-..* Tested and built with Windows 10 Enterprise. You can download a free trial from Microsoft.
+* Tested and built with Windows 10 Enterprise. You can download a free trial from Microsoft.

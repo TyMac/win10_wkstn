@@ -24,8 +24,8 @@ default['win10_wkstn']['apps'] = %w{
     putty
     slack
     terraform
-    virtualbox
     vscode
+    virtualbox
     visualstudio2017-installer
     visualstudio2017community
     whatsapp

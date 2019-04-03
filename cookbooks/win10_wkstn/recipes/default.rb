@@ -31,8 +31,15 @@ registry_key 'HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes
   action :create
 end
 
+# reboot 'now' do
+#   action :nothing
+#   reason 'Cannot continue Chef run without a reboot.'
+#   delay_mins 4
+# end
+
 # powershell_script 'enable hyper-v' do
 #   code 'Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V -All -NoRestart'
+#   notifies :reboot_now, 'reboot[now]', :immediately
 # end
 
 powershell_modules = node['win10_wkstn']['ps_modules']
@@ -51,18 +58,19 @@ workstation_apps.each do |package|
   end
 end
 
-powershell_script 'install code extensions' do
-  code <<-EOH
-  code --install-extension ms-vscode.csharp
-  code --install-extension ms-vscode.powershell
-  code --install-extension Pendrica.chef
-  code --install-extension vscoss.vscode-ansible
-  EOH
-end
+# powershell_script 'install code extensions' do
+#   code <<-EOH
+#   $env:Path = "C:\\Program Files\\Microsoft VS Code\\bin"
+#   code --install-extension ms-vscode.csharp
+#   code --install-extension ms-vscode.powershell
+#   code --install-extension Pendrica.chef
+#   code --install-extension vscoss.vscode-ansible
+#   EOH
+# end
 
 powershell_script 'install chef gems' do
   code <<-EOH
   $env:Path = "C:\\opscode\\chefdk\\bin\\"
-  chef gem install kitchen-ansible winrm winrm-rm kitchen-pester kitchen-dsc
+  chef gem install kitchen-ansible winrm winrm-fs kitchen-pester kitchen-dsc
   EOH
 end

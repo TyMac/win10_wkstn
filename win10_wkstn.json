@@ -4,12 +4,12 @@
       "cpu": "2",
       "ram_size": "4096",
       "disk_size": "41440",
-      "iso_url": "C:\\Users\\tyler\\Downloads\\17763.107.101029-1455.rs5_release_svc_refresh_CLIENTENTERPRISEEVAL_OEMRET_x64FRE_en-us.iso",
+      "iso_url": "",
       "iso_checksum_type": "sha256",
-      "iso_checksum": "0278FC4638741F4A1DC85C39ED7FA76BB15FD582165F6EF036E9A9FB2F029351", 
+      "iso_checksum": "", 
       "username" : "Administrator",
       "password" : "Administrator",
-      "output_directory": "C:\\Users\\tyler\\Documents\\Virtual Machines\\win10"
+      "output_directory": ""
     },
     "builders": [
     {
@@ -57,7 +57,7 @@
     "provisioners": [
       {
         "type": "windows-restart",
-        "restart_timeout": "30m"
+        "restart_timeout": "10m"
       },
       {
         "type": "chef-solo",

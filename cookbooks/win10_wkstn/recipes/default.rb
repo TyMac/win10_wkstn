@@ -58,6 +58,19 @@ workstation_apps.each do |package|
   end
 end
 
+chocolatey_package 'terraform' do
+  action :install
+end
+
+chocolatey_package 'chefdk' do
+  action :install
+end
+
+chocolatey_package 'packer' do
+  action :install
+  version '1.3.4'
+end
+
 # powershell_script 'install code extensions' do
 #   code <<-EOH
 #   $env:Path = "C:\\Program Files\\Microsoft VS Code\\bin"

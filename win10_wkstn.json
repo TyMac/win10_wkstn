@@ -3,13 +3,20 @@
       "vm_name": "windows10",
       "cpu": "2",
       "ram_size": "4096",
-      "disk_size": "41440",
+      "disk_size": "30720",
       "iso_url": "",
       "iso_checksum_type": "sha256",
       "iso_checksum": "", 
       "username" : "Administrator",
       "password" : "Administrator",
-      "output_directory": ""
+      "output_directory": "",
+      "iso_folder": "",
+      "iso_dest": "",
+      "files_folder": "",
+      "schily_cdrtools_url": "",
+      "proxy_ip": "",
+      "packer_iso_dir": "",
+      "packer_version": ""
     },
     "builders": [
     {
@@ -23,7 +30,9 @@
         "./windows/common/chocolatey_bootstrap.ps1",
         "./windows/common/configure-winrm.ps1",
         "./windows/windows-10-amd64/autounattend.xml",
-        "./windows/windows-10-amd64/sysprep-unattend.xml"
+        "./windows/windows-10-amd64/sysprep-unattend.xml",
+        "./windows/build/mk_mock_build_env.ps1",
+        "./windows/build/mk_answer_iso.ps1"
       ],
       "http_directory": "./windows/common/http/",
       "guest_os_type": "windows9-64",
@@ -35,7 +44,7 @@
       "winrm_username": "{{user `username`}}",
       "winrm_password": "{{user `password`}}",
       "winrm_timeout": "4h",
-      "shutdown_command": "a:\\run-sysprep.cmd",
+      "shutdown_command": "A:\\run-sysprep.cmd",
       "skip_compaction": false,
       "vmx_data": {
         "gui.fitguestusingnativedisplayresolution": "FALSE",
@@ -58,6 +67,29 @@
       {
         "type": "windows-restart",
         "restart_timeout": "10m"
+      },
+      {
+        "type": "file",
+        "source": "./windows/build/mk_answer_iso.ps1",
+        "destination": "C:\\Users\\{{user `username`}}\\Documents\\"
+      },
+      {
+        "type": "powershell",
+        "elevated_user":"{{user `username`}}",
+        "elevated_password":"{{user `password`}}",
+        "environment_vars": [
+                              "ISO_FOLDER={{user `iso_folder`}}",
+                              "ISO_DEST={{user `iso_dest`}}",
+                              "FILES_FOLDER={{user `files_folder`}}",
+                              "SCHILY_CDRTOOLS_URL={{user `schily_cdrtools_url`}}",
+                              "PROXY_IP={{user `proxy_ip`}}",
+                              "PACKER_ISO_DIR={{user `packer_iso_dir`}}",
+                              "PACKER_VERSION={{user `packer_version`}}"
+        ],
+        "inline": [
+          "A:\\mk_mock_build_env.ps1",
+          "A:\\mk_answer_iso.ps1 -iso_folder $env:ISO_FOLDER -iso_dest $env:ISO_DEST -files_folder $env:FILES_FOLDER -schily_cdrtools_url $env:SCHILY_CDRTOOLS_URL -proxy_ip $env:PROXY_IP -packer_iso_dir $env:PACKER_ISO_DIR -packer_version $env:PACKER_VERSION"
+        ]
       },
       {
         "type": "chef-solo",

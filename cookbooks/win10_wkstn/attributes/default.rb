@@ -5,29 +5,18 @@ default['win10_wkstn']['apps'] = %w{
     awscli
     azure-functions-core-tools
     azurepowershell
-    chefdk
-    chromium
     discord
     dotnetcore-sdk
     dotnetcore-runtime
-    filezilla
     firefox
     git
     github-desktop
     golang
-    jre8
-    ruby
     microsoftazurestorageexplorer
-    packer
     postman
     powershell-core
-    putty
     slack
-    terraform
     vscode
     virtualbox
-    visualstudio2017-installer
-    visualstudio2017community
-    whatsapp
     winrar
 }

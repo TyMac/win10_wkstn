@@ -20,12 +20,8 @@ if ($SkipWindowsUpdates){
 	exit 0
 }
 
-try{
-	Write-Host "Dism.exe /online /Cleanup-Image /StartComponentCleanup /ResetBase"
-	Dism.exe /online /Cleanup-Image /StartComponentCleanup /ResetBase
-} catch {
-	Write-Host "Unable to reset base. Should be ok if patches have been slipstreamed."
-}
+Write-Host "Dism.exe /online /Cleanup-Image /StartComponentCleanup /ResetBase"
+Dism.exe /online /Cleanup-Image /StartComponentCleanup /ResetBase
 
 $moduleExist = Get-Module servermanager
 

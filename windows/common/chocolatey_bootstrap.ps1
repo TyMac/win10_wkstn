@@ -6,4 +6,5 @@ catch [System.Management.Automation.MetadataException] {
 }
 $env:Path = "C:\ProgramData\chocolatey\bin"
 
-choco install chef-client vmware-tools -y
+choco install chef-client --version 14.7.17 -y 
+choco install vmware-tools -y

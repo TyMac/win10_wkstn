@@ -105,7 +105,7 @@ function install_cdrtools {
         if ( -not (test-path 'C:\ProgramData\chocolatey')) {
             try {
                 [net.webrequest]::defaultwebproxy = new-object net.webproxy "http://$proxy_ip"
-                Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
+                Set-ExecutionPolicy Bypass -Scope Process -Force; Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
             }
             catch [System.Management.Automation.MethodInvocationException] {
                 Write-Warning "Could not install chocolatey via proxy. Check your network connectivity."

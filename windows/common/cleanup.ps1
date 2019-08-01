@@ -1,5 +1,5 @@
 $ProgressPreference="SilentlyContinue"
-$ErrorActionPreference = "stop"
+$ErrorActionPreference = "Stop"
 
 for ([byte]$c = [char]'A'; $c -le [char]'Z'; $c++)  
 {  
@@ -22,14 +22,5 @@ if ($SkipWindowsUpdates){
 
 Write-Host "Dism.exe /online /Cleanup-Image /StartComponentCleanup /ResetBase"
 Dism.exe /online /Cleanup-Image /StartComponentCleanup /ResetBase
-
-$moduleExist = Get-Module servermanager
-
-if ($moduleExist){
-	Write-Host 'Get-WindowsFeature | ? { $_.InstallState -eq "Available" } | Uninstall-WindowsFeature -Remove'
-
-	import-module servermanager
-	Get-WindowsFeature | ? { $_.InstallState -eq 'Available' } | Uninstall-WindowsFeature -Remove
-}
 
 exit 0

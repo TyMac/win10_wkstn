@@ -99,13 +99,23 @@
         "run_list": ["win10_wkstn"]
       },
       {
+        "type": "powershell",
+        "inline": [
+          "Import-Module PSWindowsUpdate",
+          "Get-WindowsUpdate -install -acceptall"
+        ]
+      },
+      {
+          "type": "windows-restart",
+          "restart_timeout": "10m"
+      },
+      {
       "type": "powershell",
       "elevated_user": "{{user `username`}}",
       "elevated_password": "{{user `password`}}",
       "scripts": [
         "./windows/common/cleanup.ps1",
-        "./windows/common/ConfigureRemotingForAnsible.ps1",
-        "./windows/common/enable_hyperv.ps1"
+        "./windows/common/ConfigureRemotingForAnsible.ps1"
       ]
     }]
 }

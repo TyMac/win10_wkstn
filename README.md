@@ -22,8 +22,11 @@ If you develop with Packer you understand the need to build for various platform
     * Enables the Hyper-V Windows Feature and assocated management tools
 2. During Packer provisioning a PowerShell provisioner installs / configures:
     * A PowerShell script (mk_answer_iso.ps1) that will allow you to create answer ISOs for Hyper-V Gen 2 VM testing
+    * With the install_azure_agent var set to true, a powershell script will install the azure-devops-agent with chocolatey
 3. During Packer provisioning a chef-solo provisioner installs / configures:
     * Various registry tweaks for usability, security, debugging and development
     * Several PowerShell modules for Packer development
     * Several Chocolatey installed programs for development and usability
-4. Finally, a Packer provisioning a PowerShell provisioner cleans up the image for usage and configures WinRM for future ansible configuration
+4. Finally, a Packer provisioning a PowerShell provisioner:
+    * cleans up the image for usage
+    * configures WinRM for future ansible configuration

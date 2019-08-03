@@ -16,7 +16,14 @@
       "schily_cdrtools_url": "",
       "proxy_ip": "",
       "packer_iso_dir": "",
-      "packer_version": ""
+      "packer_version": "",
+      "install_azure_agent": "",
+      "agent_dir": "",
+      "agent_token": "",
+      "agent_integration": "",
+      "agent_url": "",
+      "logon_account": "",
+      "logon_passwd": ""
     },
     "builders": [
     {
@@ -28,6 +35,7 @@
         "./windows/common/run-sysprep.cmd",
         "./windows/common/run-sysprep.ps1",
         "./windows/common/chocolatey_bootstrap.ps1",
+        "./windows/common/chocolatey_extras.ps1",
         "./windows/common/configure-winrm.ps1",
         "./windows/windows-10-amd64/autounattend.xml",
         "./windows/windows-10-amd64/sysprep-unattend.xml",
@@ -89,6 +97,23 @@
         "inline": [
           "A:\\mk_mock_build_env.ps1",
           "A:\\mk_answer_iso.ps1 -iso_folder $env:ISO_FOLDER -iso_dest $env:ISO_DEST -files_folder $env:FILES_FOLDER -schily_cdrtools_url $env:SCHILY_CDRTOOLS_URL -proxy_ip $env:PROXY_IP -packer_iso_dir $env:PACKER_ISO_DIR -packer_version $env:PACKER_VERSION"
+        ]
+      },
+      {
+        "type": "powershell",
+        "elevated_user":"{{user `username`}}",
+        "elevated_password":"{{user `password`}}",
+        "environment_vars": [
+                              "INSTALL_AZURE_AGENT={{user `install_azure_agent`}}",
+                              "AGENT_DIR={{user `agent_dir`}}",
+                              "AGENT_TOKEN={{user `agent_token`}}",
+                              "AGENT_INTEGRATION={{user `agent_integration`}}",
+                              "AGENT_URL={{user `agent_url`}}",
+                              "LOGON_ACCOUNT={{user `logon_account`}}",
+                              "LOGON_PASSWD={{user `logon_passwd`}}"
+        ],
+        "inline": [
+          "A:\\chocolatey_extras.ps1 -install_azure_agent $env:INSTALL_AZURE_AGENT -agent_dir $env:AGENT_DIR -agent_token $env:AGENT_TOKEN -agent_integration $env:AGENT_INTEGRATION -agent_url $env:AGENT_URL -logon_account $env:LOGON_ACCOUNT -logon_passwd $env:LOGON_PASSWD"
         ]
       },
       {

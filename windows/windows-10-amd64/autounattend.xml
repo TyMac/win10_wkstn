@@ -165,7 +165,7 @@
                 <LocalAccounts>
                     <LocalAccount wcm:action="add">
                         <Password>
-                            <Value>Administrator</Value>
+                            <Value>ansible</Value>
                             <PlainText>true</PlainText>
                         </Password>
                         <Description>Ansible Service Account</Description>

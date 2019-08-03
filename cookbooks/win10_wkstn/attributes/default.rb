@@ -1,7 +1,6 @@
 default['win10_wkstn']['ps_modules'] = ['EPS', 'AWSPowerShell.NetCore']
 
 default['win10_wkstn']['apps'] = %w{
-    7zip
     awscli
     azure-functions-core-tools
     azurepowershell

@@ -1,6 +1,6 @@
 # TLDR - Build Command Example:
 
-On OS X or Linux:
+On macOS or Linux:
 ```
 packer build \
 -var iso_url="${HOME}/Downloads/17763.107.101029-1455.rs5_release_svc_refresh_CLIENTENTERPRISEEVAL_OEMRET_x64FRE_en-us.iso" \
@@ -24,6 +24,28 @@ packer build \
 -var logon_passwd="Administrator" ./win10_wkstn.json
 ```
 
+Windows (PowerShell with a user with admin privileges):
+```packer build `
+-var iso_url="C:\Users\$Env:USERNAME\OneDrive\17763.107.101029-1455.rs5_release_svc_refresh_CLIENTENTERPRISEEVAL_OEMRET_x64FRE_en-us.iso" `
+-var iso_checksum='0278FC4638741F4A1DC85C39ED7FA76BB15FD582165F6EF036E9A9FB2F029351' -var output_directory="C:\Users\$Env:USERNAME\win10" `
+-var iso_folder='C:\Users\Public\Documents\answer-iso' `
+-var iso_dest='C:\Users\Public\Documents\Packer_Builds\ISO\answer.iso' `
+-var files_folder='C:\Users\Public\Documents\files' `
+-var schily_cdrtools_url='https://svwh.dl.sourceforge.net/project/tumagcc/schily-cdrtools-3.02a07.7z' `
+-var proxy_ip='192.168.5.1:9091' `
+-var packer_iso_dir='C:\Users\Public\Documents\Packer_Builds\ISO\' `
+-var packer_version='1.3.4' `
+-var disk_size="30720" `
+-var ram_size="8192" `
+-var cpu="2" `
+-var install_azure_agent="false" `
+-var agent_dir="C:\agent" `
+-var agent_token="" `
+-var agent_integration="win10_wkstn" `
+-var agent_url="https://tymac.visualstudio.com" `
+-var logon_account="Administrator" `
+-var logon_passwd="Administrator" .\win10_wkstn.json
+```
 
 
 ## Impetus:

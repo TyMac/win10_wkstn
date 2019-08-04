@@ -1,9 +1,9 @@
 {
     "variables": {
       "vm_name": "windows10",
-      "cpu": "2",
-      "ram_size": "4096",
-      "disk_size": "30720",
+      "cpu": "",
+      "ram_size": "",
+      "disk_size": "",
       "iso_url": "",
       "iso_checksum_type": "sha256",
       "iso_checksum": "", 

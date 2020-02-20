@@ -28,7 +28,8 @@ Windows (PowerShell with a user with admin privileges):
 
     packer build `
     -var iso_url="C:\Users\$Env:USERNAME\OneDrive\17763.107.101029-1455.rs5_release_svc_refresh_CLIENTENTERPRISEEVAL_OEMRET_x64FRE_en-us.iso" `
-    -var iso_checksum='0278FC4638741F4A1DC85C39ED7FA76BB15FD582165F6EF036E9A9FB2F029351' -var output_directory="C:\Users\$Env:USERNAME\win10" `
+    -var iso_checksum='0278FC4638741F4A1DC85C39ED7FA76BB15FD582165F6EF036E9A9FB2F029351' 
+    -var output_directory="C:\Users\$Env:USERNAME\win10" `
     -var iso_folder='C:\Users\Public\Documents\answer-iso' `
     -var iso_dest='C:\Users\Public\Documents\Packer_Builds\ISO\answer.iso' `
     -var files_folder='C:\Users\Public\Documents\files' `
@@ -61,13 +62,15 @@ If you develop with Packer you understand the need to build for various platform
 1. At first boot during the Windows installation the autounattend installs / configures:
     * Chocolatey
     * chef-client
+    * chefdk
+    * schily-cdrtools
     * VMware Tools
     * Configures WinRM for PowerShell remoting
     * Installs the AzureRM PowerShell module
     * Enables the Hyper-V Windows Feature and assocated management tools
 2. During Packer provisioning a PowerShell provisioner installs / configures:
     * A PowerShell script (mk_answer_iso.ps1) that will allow you to create answer ISOs for Hyper-V Gen 2 VM testing
-    * With the install_azure_agent var set to true, a powershell script will install the azure-devops-agent with chocolatey
+    * With the `install_azure_agent` var set to `true`, a powershell script will install the azure-devops-agent with chocolatey
 3. During Packer provisioning a chef-solo provisioner installs / configures:
     * Various registry tweaks for usability, security, debugging and development
     * Several PowerShell modules for Packer development

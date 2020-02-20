@@ -238,7 +238,8 @@ function install_cdrtools {
     }
 }
 
-if ( -not (test-Path 'C:\Program Files\schily-cdrtools\win32\mkisofs.exe')) {
+if ( -not (test-Path 'C:\Program Files\schily-cdrtools\win32\mkisofs.exe') -or -not (test-Path 'C:\Program Data\chocolatey\bin\mkisofs.exe')) {
+    Write-Verbose -Message "Attempting schily-cdrtools installation." -Verbose
     install_cdrtools
     refreshenv
     $env:path += 'C:\Program Files\schily-cdrtools\win32\'
@@ -246,5 +247,6 @@ if ( -not (test-Path 'C:\Program Files\schily-cdrtools\win32\mkisofs.exe')) {
 }
 else {
     $env:path += 'C:\Program Files\schily-cdrtools\win32\'
+    Write-Verbose -Message "Attempting ISO creation." -Verbose
     create_iso
 }

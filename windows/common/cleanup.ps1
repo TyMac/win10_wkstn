@@ -23,4 +23,7 @@ if ($SkipWindowsUpdates){
 Write-Host "Dism.exe /online /Cleanup-Image /StartComponentCleanup /ResetBase"
 Dism.exe /online /Cleanup-Image /StartComponentCleanup /ResetBase
 
+chef gem install --no-user-install kitchen-hyperv
+New-VMswitch -Name "Packer" -AllowManagementOS $true -NetAdapterName "Ethernet0" # -SwitchType Internal
+
 exit 0

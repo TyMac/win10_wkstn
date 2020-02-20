@@ -131,6 +131,9 @@ workstation_apps = node['win10_wkstn']['apps']
 workstation_apps.each do |package|
   chocolatey_package package do
     action :install
+    retries 5
+    retry_delay 3
+    ignore_failure true
   end
 end
 

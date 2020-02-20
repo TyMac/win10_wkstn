@@ -25,6 +25,15 @@
       "logon_account": "",
       "logon_passwd": ""
     },
+    "sensitive-variables": [
+      "username",
+      "password",
+      "agent_token", 
+      "agent_url",
+      "agent_integration",
+      "logon_account",
+      "logon_passwd"
+    ],
     "builders": [
     {
       "vm_name":"{{user `vm_name`}}",
@@ -135,12 +144,12 @@
           "restart_timeout": "10m"
       },
       {
-      "type": "powershell",
-      "elevated_user": "{{user `username`}}",
-      "elevated_password": "{{user `password`}}",
-      "scripts": [
-        "./windows/common/cleanup.ps1",
-        "./windows/common/ConfigureRemotingForAnsible.ps1"
+        "type": "powershell",
+        "elevated_user": "{{user `username`}}",
+        "elevated_password": "{{user `password`}}",
+        "scripts": [
+          "./windows/common/cleanup.ps1",
+          "./windows/common/ConfigureRemotingForAnsible.ps1"
       ]
     }]
 }

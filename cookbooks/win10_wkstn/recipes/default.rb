@@ -147,7 +147,7 @@ end
 
 chocolatey_package 'packer' do
   action :install
-  version '1.3.4'
+  version '1.4.3'
 end
 
 # powershell_script 'install code extensions' do
@@ -163,6 +163,6 @@ end
 powershell_script 'install chef gems' do
   code <<-EOH
   $env:Path = "C:\\opscode\\chefdk\\bin\\"
-  chef gem install kitchen-ansible winrm winrm-fs kitchen-pester kitchen-dsc
+  chef gem install --no-user-install kitchen-ansible winrm winrm-fs kitchen-pester kitchen-dsc
   EOH
 end

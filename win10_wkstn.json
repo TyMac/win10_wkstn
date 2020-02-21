@@ -91,6 +91,11 @@
         "destination": "C:\\Users\\{{user `username`}}\\Documents\\"
       },
       {
+        "type": "file",
+        "source": "./windows/common/win_updates.ps1",
+        "destination": "C:\\Users\\Public\\Documents\\"
+      },
+      {
         "type": "powershell",
         "elevated_user":"{{user `username`}}",
         "elevated_password":"{{user `password`}}",
@@ -131,13 +136,6 @@
         "skip_install": "true",
         "cookbook_paths": ["cookbooks"],
         "run_list": ["win10_wkstn"]
-      },
-      {
-        "type": "powershell",
-        "inline": [
-          "Import-Module PSWindowsUpdate",
-          "Get-WindowsUpdate -install -acceptall"
-        ]
       },
       {
           "type": "windows-restart",

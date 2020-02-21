@@ -26,4 +26,6 @@ Dism.exe /online /Cleanup-Image /StartComponentCleanup /ResetBase
 chef gem install --no-user-install kitchen-hyperv
 New-VMswitch -Name "Packer" -AllowManagementOS $true -NetAdapterName "Ethernet0" # -SwitchType Internal
 
+schtasks /create /tn PackerFwTask /tr "C:\WINDOWS\system32\WindowsPowerShell\v1.0\powershell.exe -File C:\Users\Public\Documents\win_updates.ps1" /SC onstart /NP
+
 exit 0

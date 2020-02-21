@@ -146,8 +146,8 @@
         "elevated_user": "{{user `username`}}",
         "elevated_password": "{{user `password`}}",
         "scripts": [
-          "./windows/common/cleanup.ps1",
-          "./windows/common/ConfigureRemotingForAnsible.ps1"
+          "./windows/common/win_updates.ps1",
+          "./windows/common/cleanup.ps1"
       ]
     }]
 }

@@ -10,3 +10,4 @@ choco install chefdk --version 3.2.30 -y
 choco install vmware-tools -y
 choco install schily-cdrtools -pre -y
 choco install chef-client --version 14.7.17 -y
+choco install pswindowsupdate -y

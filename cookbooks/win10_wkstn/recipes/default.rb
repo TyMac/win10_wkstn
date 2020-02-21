@@ -166,3 +166,13 @@ powershell_script 'install chef gems' do
   chef gem install --no-user-install kitchen-ansible winrm winrm-fs kitchen-pester kitchen-dsc
   EOH
 end
+
+# chef_gem 'kitchen-hyperv' do
+#   action :install
+#   options "--no-user-install"
+# end
+
+gem_package "kitchen-hyperv" do
+  gem_binary "/opt/chefdk/embedded/bin/gem"
+  options "--no-user-install"
+end

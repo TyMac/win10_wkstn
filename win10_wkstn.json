@@ -146,6 +146,7 @@
         "elevated_user": "{{user `username`}}",
         "elevated_password": "{{user `password`}}",
         "scripts": [
+          "./windows/common/configure_hyperv.ps1",
           "./windows/common/win_updates.ps1",
           "./windows/common/cleanup.ps1"
       ]

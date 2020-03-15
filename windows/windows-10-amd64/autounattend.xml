@@ -98,26 +98,40 @@
                 </SynchronousCommand>
                 <SynchronousCommand wcm:action="add">
                     <CommandLine>powershell -NoLogo -ExecutionPolicy RemoteSigned -File a:\chocolatey_bootstrap.ps1</CommandLine>
-                    <Description>Install VMware Tools</Description>
+                    <Description>Install Chocolatey</Description>
                     <Order>3</Order>
                     <RequiresUserInput>false</RequiresUserInput>
                 </SynchronousCommand>
+                <!--
                 <SynchronousCommand wcm:action="add">
-                    <CommandLine>cmd.exe /c powershell -Command "Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force"</CommandLine>
-                    <Description>Set Execution Policy 64 Bit</Description>
+                    <CommandLine>cmd.exe /c powershell -Command "Get-WUInstall -WindowsUpdate -AcceptAll -UpdateType Software -AutoReboot"</CommandLine>
+                    <Description>Install Windows Updates</Description>
                     <Order>4</Order>
                     <RequiresUserInput>true</RequiresUserInput>
                 </SynchronousCommand>
                 <SynchronousCommand wcm:action="add">
-                    <CommandLine>cmd.exe /c powershell -Command "Install-Module -Name AzureRM -Force"</CommandLine>
+                    <CommandLine>cmd.exe /c powershell -Command "Get-WUInstall -WindowsUpdate -AcceptAll -UpdateType Software -AutoReboot"</CommandLine>
                     <Description>Set Execution Policy 64 Bit</Description>
                     <Order>5</Order>
                     <RequiresUserInput>true</RequiresUserInput>
                 </SynchronousCommand>
                 <SynchronousCommand wcm:action="add">
-                    <CommandLine>cmd.exe /c powershell -Command "Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V -All -NoRestart"</CommandLine>
-                    <Description>Set Execution Policy 64 Bit</Description>
+                    <CommandLine>cmd.exe /c powershell -Command "Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force"</CommandLine>
+                    <Description>Install nuget provider</Description>
                     <Order>6</Order>
+                    <RequiresUserInput>true</RequiresUserInput>
+                </SynchronousCommand>
+                <SynchronousCommand wcm:action="add">
+                    <CommandLine>cmd.exe /c powershell -Command "Install-Module -Name AzureRM -Force"</CommandLine>
+                    <Description>Install AzureRM PS Module</Description>
+                    <Order>7</Order>
+                    <RequiresUserInput>true</RequiresUserInput>
+                </SynchronousCommand>
+                -->
+                <SynchronousCommand wcm:action="add">
+                    <CommandLine>cmd.exe /c powershell -Command "Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V -All -NoRestart"</CommandLine>
+                    <Description>Enable Hyper-V Feature</Description>
+                    <Order>8</Order>
                     <RequiresUserInput>true</RequiresUserInput>
                 </SynchronousCommand>
                 <!--
@@ -148,12 +162,6 @@
                     <RequiresUserInput>true</RequiresUserInput>
                 </SynchronousCommand>
                 -->
-                <SynchronousCommand wcm:action="add">
-                    <CommandLine>cmd.exe /c powershell -Command "Get-WUInstall -Download -Verbose -AcceptAll"</CommandLine>
-                    <Description>Set Execution Policy 64 Bit</Description>
-                    <Order>12</Order>
-                    <RequiresUserInput>true</RequiresUserInput>
-                </SynchronousCommand>
                 <SynchronousCommand wcm:action="add">
                     <CommandLine>powershell -NoLogo -ExecutionPolicy RemoteSigned -File a:\configure-winrm.ps1</CommandLine>
                     <Description>Configure PS Remoting</Description>

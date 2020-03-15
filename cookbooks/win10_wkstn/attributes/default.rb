@@ -1,4 +1,4 @@
-default['win10_wkstn']['ps_modules'] = ['EPS', 'AWSPowerShell.NetCore']
+default['win10_wkstn']['ps_modules'] = ['Az', 'EPS', 'AWSPowerShell.NetCore']
 
 default['win10_wkstn']['apps'] = %w{
     awscli

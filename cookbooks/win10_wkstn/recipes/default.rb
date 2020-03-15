@@ -118,6 +118,13 @@ registry_key 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\PowerShell\
   recursive true
 end
 
+# powershell_package_source 'nuget' do
+#   provider_name                "NuGet"
+#   url                          "https://nuget.org/api/v2/"
+#   trusted                      true
+#   action                       :register
+# end
+
 powershell_modules = node['win10_wkstn']['ps_modules']
 
 powershell_modules.each do |modules|
@@ -131,6 +138,7 @@ workstation_apps = node['win10_wkstn']['apps']
 workstation_apps.each do |package|
   chocolatey_package package do
     action :install
+    timeout 9000
     retries 5
     retry_delay 3
     ignore_failure true
@@ -143,6 +151,7 @@ end
 
 chocolatey_package 'chefdk' do
   action :install
+  version '3.7.23'
 end
 
 chocolatey_package 'packer' do
@@ -173,6 +182,6 @@ end
 # end
 
 gem_package "kitchen-hyperv" do
-  gem_binary "/opt/chefdk/embedded/bin/gem"
+  gem_binary "C:\\opscode\\chefdk\\embedded\\bin\\gem"
   options "--no-user-install"
 end
